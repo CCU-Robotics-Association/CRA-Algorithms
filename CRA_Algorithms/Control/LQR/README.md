@@ -30,14 +30,9 @@ LQR 常用于：
 
 LQR 通常针对连续时间线性系统：
 
-$$
-\dot{\mathbf{x}}
-================
-
-A\mathbf{x}
-+
-B\mathbf{u}
-$$
+```math
+\dot{\mathbf{x}}=A\mathbf{x}+B\mathbf{u}
+```
 
 其中：
 
@@ -49,15 +44,14 @@ $$
 
 例如一个移动物体可以使用：
 
-$$
+```math
 \mathbf{x}
-==========
-
+=
 \begin{bmatrix}
-p\
+p\\
 v
 \end{bmatrix}
-$$
+```
 
 其中：
 
@@ -70,12 +64,9 @@ $$
 
 LQR 使用状态反馈控制律：
 
-$$
-\mathbf{u}
-==========
-
--K\mathbf{x}
-$$
+```math
+\mathbf{u}=-K\mathbf{x}
+```
 
 其中：
 
@@ -85,9 +76,9 @@ $$
 
 因此 LQR 的核心任务就是寻找一个合适的：
 
-$$
+```math
 K
-$$
+```
 
 使系统稳定，并且具有较好的控制性能。
 
@@ -97,26 +88,23 @@ $$
 
 控制律为：
 
-$$
-\mathbf{u}
-==========
-
--K\mathbf{x}
-$$
+```math
+\mathbf{u}=-K\mathbf{x}
+```
 
 前面的负号表示一种**负反馈**。
 
 例如当前机器人位置为：
 
-$$
+```math
 p>0
-$$
+```
 
 而目标位置为：
 
-$$
+```math
 p_d=0
-$$
+```
 
 那么控制器应该产生一个向负方向的控制作用，使机器人向目标位置运动。
 
@@ -134,9 +122,9 @@ LQR 不只是要求系统最终稳定。
 
 即：
 
-$$
+```math
 \mathbf{x}\rightarrow0
-$$
+```
 
 ### 问题二：控制输入不能无限大
 
@@ -152,30 +140,28 @@ $$
 
 因此 LQR 定义性能指标：
 
-$$
+```math
 J
 =
-
 \int_0^\infty
 \left(
 \mathbf{x}^TQ\mathbf{x}
 +
 \mathbf{u}^TR\mathbf{u}
-\right)
-dt
-$$
+\right)\,dt
+```
 
 LQR 的目标就是寻找：
 
-$$
+```math
 K
-$$
+```
 
 使：
 
-$$
+```math
 J
-$$
+```
 
 达到最小。
 
@@ -185,9 +171,9 @@ $$
 
 代价函数中的：
 
-$$
+```math
 \mathbf{x}^TQ\mathbf{x}
-$$
+```
 
 用于衡量状态偏离目标的程度。
 
@@ -204,38 +190,31 @@ Q = np.array([
 
 对应：
 
-$$
+```math
 Q
 =
-
 \begin{bmatrix}
-10 & 0\
+10 & 0\\
 0 & 1
 \end{bmatrix}
-$$
+```
 
 如果状态为：
 
-$$
+```math
 \mathbf{x}
-==========
-
+=
 \begin{bmatrix}
-p\
+p\\
 v
 \end{bmatrix}
-$$
+```
 
 则：
 
-$$
-\mathbf{x}^TQ\mathbf{x}
-=======================
-
-10p^2
-+
-v^2
-$$
+```math
+\mathbf{x}^TQ\mathbf{x}=10p^2+v^2
+```
 
 因此这里对位置误差的惩罚是速度误差的 10 倍。
 
@@ -249,9 +228,9 @@ $$
 
 代价函数中的：
 
-$$
+```math
 \mathbf{u}^TR\mathbf{u}
-$$
+```
 
 用于衡量控制输入的大小。
 
@@ -265,18 +244,18 @@ R = np.array([
 
 即：
 
-$$
+```math
 R=
 \begin{bmatrix}
 1
 \end{bmatrix}
-$$
+```
 
 如果增大 $R$：
 
-$$
+```math
 R\uparrow
-$$
+```
 
 意味着：
 
@@ -286,9 +265,9 @@ $$
 
 如果减小 $R$：
 
-$$
+```math
 R\downarrow
-$$
+```
 
 意味着：
 
@@ -342,45 +321,37 @@ R 增大
 
 为了获得最优反馈增益 $K$，LQR 需要求解连续时间代数 Riccati 方程：
 
-$$
+```math
 A^TP
 +
 PA
---
-
+-
 PBR^{-1}B^TP
 +
 Q
 =
-
 0
-$$
+```
 
 其中：
 
-$$
+```math
 P
-$$
+```
 
 是需要求解的对称矩阵。
 
 得到 $P$ 后，可以计算最优反馈增益：
 
-$$
-K
-=
-
-R^{-1}B^TP
-$$
+```math
+K=R^{-1}B^TP
+```
 
 最终得到控制律：
 
-$$
-\mathbf{u}
-==========
-
--K\mathbf{x}
-$$
+```math
+\mathbf{u}=-K\mathbf{x}
+```
 
 ---
 
@@ -416,12 +387,9 @@ K = np.linalg.solve(
 
 理论公式是：
 
-$$
-K
-=
-
-R^{-1}B^TP
-$$
+```math
+K=R^{-1}B^TP
+```
 
 代码中没有直接使用：
 
@@ -445,51 +413,39 @@ np.linalg.solve()
 
 原系统为：
 
-$$
-\dot{\mathbf{x}} = A\mathbf{x} + B\mathbf{u}
-$$
+```math
+\dot{\mathbf{x}}=A\mathbf{x}+B\mathbf{u}
+```
 
 LQR 控制律为：
 
-$$
-\mathbf{u} = -K\mathbf{x}
-$$
+```math
+\mathbf{u}=-K\mathbf{x}
+```
 
 将 LQR 控制律代入原系统：
 
-$$
-\dot{\mathbf{x}}
-=
-A\mathbf{x}
-+
-B(-K\mathbf{x})
-$$
+```math
+\dot{\mathbf{x}}=A\mathbf{x}+B(-K\mathbf{x})
+```
 
 整理可得：
 
-$$
-\dot{\mathbf{x}}
-=
-A\mathbf{x}
--
-BK\mathbf{x}
-$$
+```math
+\dot{\mathbf{x}}=A\mathbf{x}-BK\mathbf{x}
+```
 
 进一步得到：
 
-$$
-\dot{\mathbf{x}}
-=
-(A-BK)\mathbf{x}
-$$
+```math
+\dot{\mathbf{x}}=(A-BK)\mathbf{x}
+```
 
 因此，LQR 控制后的闭环系统矩阵为：
 
-$$
-A_{\mathrm{cl}}
-=
-A-BK
-$$
+```math
+A_{\mathrm{cl}}=A-BK
+```
 
 ## 12. 闭环特征值
 
@@ -503,32 +459,31 @@ eigenvalues = np.linalg.eigvals(
 
 即求：
 
-$$
+```math
 A-BK
-$$
+```
 
 的特征值。
 
 对于连续时间线性系统，如果所有闭环特征值均满足：
 
-$$
+```math
 \operatorname{Re}(\lambda_i)<0
-$$
+```
 
 则闭环系统通常是渐近稳定的。
 
 也就是说：
 
-$$
-\mathbf{x}(t)
-\rightarrow0
-$$
+```math
+\mathbf{x}(t)\rightarrow0
+```
 
 当：
 
-$$
+```math
 t\rightarrow\infty
-$$
+```
 
 ---
 
@@ -540,15 +495,14 @@ $$
 
 状态定义为：
 
-$$
+```math
 \mathbf{x}
-==========
-
+=
 \begin{bmatrix}
-p\
+p\\
 v
 \end{bmatrix}
-$$
+```
 
 其中：
 
@@ -557,72 +511,68 @@ $$
 
 控制输入：
 
-$$
+```math
 u
-$$
+```
 
 表示加速度。
 
 系统满足：
 
-$$
+```math
 \dot{p}=v
-$$
+```
 
 以及：
 
-$$
+```math
 \dot{v}=u
-$$
+```
 
 写成矩阵：
 
-$$
+```math
 \begin{bmatrix}
-\dot{p}\
+\dot{p}\\
 \dot{v}
 \end{bmatrix}
-=============
-
+=
 \begin{bmatrix}
-0 & 1\
+0 & 1\\
 0 & 0
 \end{bmatrix}
 \begin{bmatrix}
-p\
+p\\
 v
 \end{bmatrix}
 +
 \begin{bmatrix}
-0\
+0\\
 1
-\end{bmatrix}
-u
-$$
+\end{bmatrix}u
+```
 
 因此：
 
-$$
+```math
 A
 =
-
 \begin{bmatrix}
-0 & 1\
+0 & 1\\
 0 & 0
 \end{bmatrix}
-$$
+```
 
 以及：
 
-$$
+```math
 B
 =
-
 \begin{bmatrix}
-0\
+0\\
 1
 \end{bmatrix}
-$$
+```
 
 代码中：
 
@@ -642,33 +592,27 @@ B = np.array([
 
 由：
 
-$$
+```math
 \dot{v}=u
-$$
+```
 
 对时间积分一次：
 
-$$
-v(t)
-====
-
-\int u(t),dt
-$$
+```math
+v(t)=\int u(t)\,dt
+```
 
 又因为：
 
-$$
+```math
 \dot{p}=v
-$$
+```
 
 再次积分：
 
-$$
-p(t)
-====
-
-\int v(t),dt
-$$
+```math
+p(t)=\int v(t)\,dt
+```
 
 因此控制输入 $u$ 经过两次积分才能影响位置 $p$。
 
@@ -684,25 +628,24 @@ $$
 
 Demo 设置：
 
-$$
+```math
 \mathbf{x}(0)
-=============
-
+=
 \begin{bmatrix}
-5\
+5\\
 0
 \end{bmatrix}
-$$
+```
 
 表示：
 
-$$
+```math
 p(0)=5
-$$
+```
 
-$$
+```math
 v(0)=0
-$$
+```
 
 也就是机器人一开始：
 
@@ -713,15 +656,14 @@ $$
 
 目标状态为：
 
-$$
+```math
 \mathbf{x}_d
-============
-
+=
 \begin{bmatrix}
-0\
+0\\
 0
 \end{bmatrix}
-$$
+```
 
 即：
 
@@ -736,23 +678,15 @@ $$
 
 每一个控制周期都执行：
 
-$$
-\mathbf{u}_k
-============
-
--K\mathbf{x}_k
-$$
+```math
+\mathbf{u}_k=-K\mathbf{x}_k
+```
 
 然后根据：
 
-$$
-\dot{\mathbf{x}}
-================
-
-A\mathbf{x}
-+
-B\mathbf{u}
-$$
+```math
+\dot{\mathbf{x}}=A\mathbf{x}+B\mathbf{u}
+```
 
 计算系统状态变化率。
 
@@ -778,54 +712,37 @@ u = -Kx
 
 由于状态空间方程是连续时间形式：
 
-$$
-\dot{\mathbf{x}}
-================
-
-A\mathbf{x}
-+
-B\mathbf{u}
-$$
+```math
+\dot{\mathbf{x}}=A\mathbf{x}+B\mathbf{u}
+```
 
 仿真程序需要将其离散计算。
 
 本项目使用 Euler 欧拉积分：
 
-$$
-\mathbf{x}_{k+1}
-================
-
-\mathbf{x}_k
-+
-\dot{\mathbf{x}}_k\Delta t
-$$
+```math
+\mathbf{x}_{k+1}=\mathbf{x}_k+\dot{\mathbf{x}}_k\Delta t
+```
 
 其中：
 
-$$
-\dot{\mathbf{x}}_k
-==================
-
-A\mathbf{x}_k
-+
-B\mathbf{u}_k
-$$
+```math
+\dot{\mathbf{x}}_k=A\mathbf{x}_k+B\mathbf{u}_k
+```
 
 因此：
 
-$$
+```math
 \mathbf{x}_{k+1}
-================
-
+=
 \mathbf{x}_k
 +
 \left(
 A\mathbf{x}_k
 +
 B\mathbf{u}_k
-\right)
-\Delta t
-$$
+\right)\Delta t
+```
 
 对应代码：
 
@@ -877,27 +794,27 @@ K, P, eigenvalues = lqr(
 
 LQR 通常不直接手动修改：
 
-$$
+```math
 K
-$$
+```
 
 而是调节：
 
-$$
+```math
 Q
-$$
+```
 
 和：
 
-$$
+```math
 R
-$$
+```
 
 再自动求解：
 
-$$
+```math
 K
-$$
+```
 
 ---
 
@@ -905,27 +822,25 @@ $$
 
 例如从：
 
-$$
+```math
 Q
 =
-
 \begin{bmatrix}
-10&0\
-0&1
+10 & 0\\
+0 & 1
 \end{bmatrix}
-$$
+```
 
 改为：
 
-$$
+```math
 Q
 =
-
 \begin{bmatrix}
-100&0\
-0&1
+100 & 0\\
+0 & 1
 \end{bmatrix}
-$$
+```
 
 意味着：
 
@@ -939,15 +854,14 @@ $$
 
 例如：
 
-$$
+```math
 Q
 =
-
 \begin{bmatrix}
-10&0\
-0&20
+10 & 0\\
+0 & 20
 \end{bmatrix}
-$$
+```
 
 意味着：
 
@@ -961,9 +875,9 @@ $$
 
 例如：
 
-$$
+```math
 R=10
-$$
+```
 
 意味着：
 
@@ -971,9 +885,9 @@ $$
 
 因此：
 
-$$
-|u|
-$$
+```math
+\lvert u\rvert
+```
 
 通常会减小。
 
