@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+@ Project            : PID
+@ Description        : demo
+@ Author             : XCrane
+"""
+
 import matplotlib.pyplot as plt
 from pid import PID
 
