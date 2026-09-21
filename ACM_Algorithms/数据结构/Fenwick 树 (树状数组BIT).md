@@ -39,7 +39,7 @@ inline int lowbit(int x) {
 
 # 操作
 对于数组`c[N]`来说，`c[i]`的值管辖的区间为$[i - lowerbit(i) + 1,i]$，也就是$\sum_{x = i - lowerbit(i) + 1}^{i} c[i]$，如图：
-![[Pasted image 20260625234703.png]]
+![](../资源归档/assets/Pasted%20image%2020260625234703.png)
 `emmmmm`似乎差不多没啥。
 
 ## 区间查询
