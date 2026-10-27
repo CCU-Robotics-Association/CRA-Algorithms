@@ -28,11 +28,11 @@ CCU 机器人协会 · 2024 —— Future
 
 ## <img src="./assets/icons/book-open.svg" width="22" height="22" alt=""> Overview | 内容介绍
 
-本目录整理 ***CRA*** 的机器人算法资料，覆盖控制、运动学、动力学、腿式机器人、碰撞检测与计算机视觉
+本目录整理 ***CRA*** 的机器人算法资料，覆盖控制、运动学、动力学、轮腿机器人、碰撞检测与计算机视觉
 
 每个模块包含算法说明、Python 实现与演示脚本，便于结合原理、代码和可视化结果学习
 
-[控制](#control) · [运动学](#kinematics) · [动力学](#dynamics) · [腿式机器人](#legged-robot) · [碰撞检测](#collision-detection) · [计算机视觉](#computer-vision) · [快速开始](#quick-start)
+[控制](#control) · [运动学](#kinematics) · [动力学](#dynamics) · [轮腿机器人](#legged-robot) · [碰撞检测](#collision-detection) · [计算机视觉](#computer-vision) · [快速开始](#quick-start)
 
 ## <img src="./assets/icons/users-round.svg" width="22" height="22" alt=""> Author | 编写作者
 
@@ -146,7 +146,7 @@ python -m Dynamics.RNEA.demo
 
 - 入门控制可先看 PID，再结合状态空间模型阅读 LQR 与 SMO
 - 机械臂部分按正运动学、解析逆解、数值逆解的顺序学习，再阅读动力学
-- 腿式机器人部分结合 LIPM、ZMP 与落脚点控制，对照各模块的模型假设
+- 轮腿机器人部分结合 LIPM、ZMP 与落脚点控制，对照各模块的模型假设
 - 碰撞检测与计算机视觉可按索引独立阅读，对比参数变化与演示结果
 
 ## <img src="./assets/icons/wrench.svg" width="22" height="22" alt=""> Maintenance | 资料维护
